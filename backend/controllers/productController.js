@@ -91,30 +91,69 @@ exports.getSingle = async (req, res, next) => {
     }
 }
 
+// exports.all = async (req, res, next) => {
+
+//     try {
+
+//         const products = await Product.find().populate({
+//             path: 'category',
+//             model: 'Category'
+
+//         })
+//         res.json({
+//             message: "Available Products",
+//             products: products,
+//         })
+//     } catch (error) {
+
+//         console.log(error);
+
+//         return res.json({
+//             message: "Error",
+//             success: false,
+//         })
+
+//     }
+// }
+
 exports.all = async (req, res, next) => {
-
     try {
+        const { min_price, max_price, page = 1, limit = 10 } = req.query;
 
-        const products = await Product.find().populate({
-            path: 'category',
-            model: 'Category'
+        // Parse price filters as numbers
+        const minPrice = parseFloat(min_price);
+        const maxPrice = parseFloat(max_price);
 
-        })
+        // Build query based on price filters
+        let filter = {};
+        if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+            filter.sell_price = { $gte: minPrice, $lte: maxPrice }; // Filter by price range
+        }
+
+        // Pagination logic
+        const skip = (page - 1) * limit;
+        const products = await Product.find(filter)
+            .skip(skip)
+            .limit(limit)
+            .populate({
+                path: 'category',
+                model: 'Category',
+            });
+
         res.json({
             message: "Available Products",
             products: products,
-        })
+        });
     } catch (error) {
-
         console.log(error);
-
         return res.json({
             message: "Error",
             success: false,
-        })
-
+        });
     }
-}
+};
+
+
 
 exports.delete = async (req, res, next) => {
     try {

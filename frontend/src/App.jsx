@@ -17,6 +17,9 @@ import Login from './pages/user/Login';
 import { auth } from './utils/firebase';
 import Cart from './pages/Cart';
 import OrdersList from './pages/order/OrdersList';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 import { getToken } from "firebase/messaging"
 import { messaging } from './utils/firebase';

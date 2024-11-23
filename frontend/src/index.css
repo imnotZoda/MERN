@@ -1,3 +1,33 @@
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* Add this to your CSS file (or use Tailwind classes directly) */
+.price-filter {
+  background-color: #f8f9fa; /* Light background */
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+.filter-label {
+  font-size: 10px; /* Smaller size to keep it subtle */
+  color: #6c757d; /* Soft text color */
+  font-weight: 500;
+}
+
+.price-input {
+  background-color: #f1f1f1; /* Light background for input fields */
+  border: 1px solid #ced4da; /* Light border */
+  border-radius: 4px; /* Subtle rounded corners */
+}
+
+.product-listing-container {
+  padding-top: 20px; /* Ensure there's some space above */
+}
+
+.product-listing-container .product-list {
+  margin-top: 20px;
+}
+
+
